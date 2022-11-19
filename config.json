@@ -1,0 +1,22 @@
+[
+  {
+  "name": "user",
+  "build": true,
+  "fields": [
+    {"name": "name", "type": "string", "required": true, "example":  "Ehsan"},
+    {"name": "family", "type": "string", "required": true, "example":  "Shirzadi"},
+    {"name": "username", "type": "string", "required": true, "example":  "ehsan"},
+    {"name": "type", "type": "string", "required": true, "example":  "", "enum":  ["admin", "user"] },
+    {"name": "age", "type": "integer", "required": false, "example":  20}
+  ]
+  },
+  {
+  "name": "item",
+  "build": true,
+  "fields": [
+    {"name": "name", "type": "string", "required": true, "example":  "Pen"},
+    {"name": "count", "type": "integer", "required": true, "example":  5},
+    {"name": "color", "type": "string", "required": true, "example":  "red", "enum":  ["red", "blue", "black"]}
+  ]
+  }
+]
