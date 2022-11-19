@@ -75,7 +75,7 @@ def create_path(object):
 
 def create_responses():
     template = get_template('response')
-    write_data(template, 'output/response.yaml')
+    write_data(template, f'{OUTPUT_DIR}/response.yaml')
 
 
 def create_swagger_file(configs):
@@ -94,7 +94,7 @@ def create_swagger_file(configs):
     template = template.replace('%EMAIL%', project_configs['email'])
     template = template.replace('%SERVERS%', servers)
     template = template.replace('%PATHS%', paths)
-    write_data(template, 'output/swagger-ui.yaml')
+    write_data(template, f'{OUTPUT_DIR}/swagger-ui.yaml')
 
 
 for config in configs:
