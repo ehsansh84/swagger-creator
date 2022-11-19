@@ -3,6 +3,10 @@ import os
 OUTPUT_DIR = 'output'
 f = open('config.json')
 configs = loads(f.read())
+f.close()
+f = open('project_config.json')
+project_configs = loads(f.read())
+f.close()
 br = '\n'
 
 
@@ -60,7 +64,38 @@ def create_path(object):
     template = template.replace('%CAPITAL_OBJECT_NAME%', capital_object_name)
     write_data(template, f'{PATH_DIR}/{object["name"]}.yaml')
 
+    template = get_template('path_id')
+    template = template.replace('%OBJECT_NAME%', object_name)
+    template = template.replace('%CAPITAL_OBJECT_NAME%', capital_object_name)
+    write_data(template, f'{PATH_DIR}/{object["name"]}_id.yaml')
+
+
+def create_responses():
+    template = get_template('response')
+    write_data(template, 'output/response.yaml')
+
+
+def create_swagger_file(configs):
+    servers = ""
+    for server in project_configs['servers']:
+        servers += f'  - url: {server["url"]}\n'
+        servers += f'    description: {server["description"]}\n'
+    paths = ""
+    for config in configs:
+        paths += f'\n  /{config["name"]}/:'
+        paths += f'\n    $ref:./paths/{config["name"]}.yaml'
+        paths += f'\n  /{config["name"]}/{{id}}:'
+        paths += f'\n    $ref:./paths/{config["name"]}_id.yaml'
+    template = get_template('swagger-ui')
+    template = template.replace('%PROJECT_NAME%', project_configs['name'])
+    template = template.replace('%EMAIL%', project_configs['email'])
+    template = template.replace('%SERVERS%', servers)
+    template = template.replace('%PATHS%', paths)
+    print(template)
+
 
 for config in configs:
     create_schema(config)
     create_path(config)
+create_responses()
+create_swagger_file(configs)
