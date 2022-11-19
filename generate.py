@@ -6,6 +6,19 @@ configs = loads(f.read())
 br = '\n'
 
 
+def get_template(name):
+    f = open(f'templates/{name}.template')
+    template = f.read()
+    f.close()
+    return template
+
+
+def write_data(data, file):
+    f = open(file, 'w')
+    f.write(data)
+    f.close()
+
+
 def create_schema(object):
     SCHEMA_DIR = f'{OUTPUT_DIR}/schemas'
     if not os.path.exists(OUTPUT_DIR):
@@ -49,16 +62,10 @@ def create_path(object):
         os.makedirs(PATH_DIR)
     object_name = object['name']
     capital_object_name = object['name'].capitalize()
-    f = open('templates/path.template')
-    template = f.read()
-    f.close()
-
+    template = get_template('path')
     template = template.replace('%OBJECT_NAME%', object_name)
     template = template.replace('%CAPITAL_OBJECT_NAME%', capital_object_name)
-    print(template)
-    f = open(f'{PATH_DIR}/{object["name"]}.yaml', 'w')
-    f.write(template)
-    f.close()
+    write_data(template, f'{PATH_DIR}/{object["name"]}.yaml')
 
 
 for config in configs:
