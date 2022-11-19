@@ -94,6 +94,7 @@ def create_swagger_file(configs):
     template = template.replace('%EMAIL%', project_configs['email'])
     template = template.replace('%SERVERS%', servers)
     template = template.replace('%PATHS%', paths)
+    write_data(template, 'output/swagger-ui.yaml')
 
 
 for config in configs:
