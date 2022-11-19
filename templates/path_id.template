@@ -1,0 +1,56 @@
+get:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      type: string
+      description: Entity ID
+  responses:
+    '200':
+      description: Success
+      schema:
+        $ref: '.././schemas/%OBJECT_NAME%.yaml'
+    '400':
+      description: Bad Request
+    '403':
+      description: Unauthorized
+    '404':
+      description: Record not found
+  summary: Return a specific record
+  description: Return an existing record
+  operationId: get_single_%OBJECT_NAME%
+  tags:
+    - %CAPITAL_OBJECT_NAME%
+delete:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      type: string
+      description: Entity ID
+  responses:
+    $ref: '../response.yaml'
+  summary: Delete a specific record
+  description: Delete specific record
+  operationId: delete_single_%OBJECT_NAME%
+  tags:
+    - %CAPITAL_OBJECT_NAME%
+put:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      type: string
+      description: Entity ID
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '.././schemas/%OBJECT_NAME%.yaml'
+  responses:
+    $ref: '../response.yaml'
+  summary: Update a specific record
+  description: Update a specific record
+  operationId: update_single_%OBJECT_NAME%
+  tags:
+    - %CAPITAL_OBJECT_NAME%
