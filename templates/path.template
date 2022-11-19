@@ -1,0 +1,38 @@
+get:
+  responses:
+    '200':
+      description: Success
+      schema:
+        type: array
+        items:
+          $ref: '.././schemas/%OBJECT_NAME%.yaml'
+    '400':
+      description: Bad Request
+    '403':
+      description: Unauthorized
+    '404':
+      description: Entity not found
+  summary: Return all entities
+  description: Return all existing entities
+  operationId: get%CAPITAL_OBJECT_NAME%s
+  tags:
+    - %CAPITAL_OBJECT_NAME%
+post:
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '.././schemas/%OBJECT_NAME%.yaml'
+  responses:
+    '200':
+      description: Successfully created
+    '400':
+      description: Bad Request
+    '403':
+      description: Unauthorized
+  summary: Create %OBJECT_NAME%
+  description: Create %OBJECT_NAME%
+  operationId: create%CAPITAL_OBJECT_NAME%
+  tags:
+    - %CAPITAL_OBJECT_NAME%
