@@ -1,0 +1,12 @@
+openapi: 3.0.2
+info:
+  description: "This is the documentation for `%PROJECT_NAME%` APIs."
+  version: "1.0.0"
+  title: "%PROJECT_NAME%"
+  termsOfService: ""
+  contact:
+    email: %EMAIL%
+servers:
+%SERVERS%
+paths:
+%PATHS%
