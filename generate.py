@@ -41,5 +41,26 @@ def create_schema(object):
     f.close()
 
 
+def create_path(object):
+    PATH_DIR = f'{OUTPUT_DIR}/paths'
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+    if not os.path.exists(PATH_DIR):
+        os.makedirs(PATH_DIR)
+    object_name = object['name']
+    capital_object_name = object['name'].capitalize()
+    f = open('templates/path.template')
+    template = f.read()
+    f.close()
+
+    template = template.replace('%OBJECT_NAME%', object_name)
+    template = template.replace('%CAPITAL_OBJECT_NAME%', capital_object_name)
+    print(template)
+    f = open(f'{PATH_DIR}/{object["name"]}.yaml', 'w')
+    f.write(template)
+    f.close()
+
+
 for config in configs:
     create_schema(config)
+    create_path(config)
