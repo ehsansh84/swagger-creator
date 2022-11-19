@@ -33,7 +33,6 @@ def create_schema(object):
             enum += '    enum:'
             for item in field.get('enum'):
                 enum += f'\n      - {item}'
-            # print(enum)
         properties += f'''
   {field['name']}:
     type: {field['type']}
@@ -42,16 +41,10 @@ def create_schema(object):
 '''
         if field['required']:
             required_fields += f'  - {field["name"]}\n'
-    f = open('templates/schema.template')
-    template = f.read()
-    f.close()
-
+    template = get_template('schema')
     template = template.replace('%REQUIRED_FIELDS%', required_fields)
     template = template.replace('%PROPERTIES%', properties)
-    print(template)
-    f = open(f'{SCHEMA_DIR}/{object["name"]}.yaml', 'w')
-    f.write(template)
-    f.close()
+    write_data(template, f'{SCHEMA_DIR}/{object["name"]}.yaml')
 
 
 def create_path(object):
