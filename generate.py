@@ -86,9 +86,9 @@ def create_swagger_file(configs):
     paths = ""
     for config in configs:
         paths += f'\n  /{config["name"]}/:'
-        paths += f'\n    $ref:./paths/{config["name"]}.yaml'
+        paths += f'\n    $ref: ./paths/{config["name"]}.yaml'
         paths += f'\n  /{config["name"]}/{{id}}:'
-        paths += f'\n    $ref:./paths/{config["name"]}_id.yaml'
+        paths += f'\n    $ref: ./paths/{config["name"]}_id.yaml'
     template = get_template('swagger-ui')
     template = template.replace('%PROJECT_NAME%', project_configs['name'])
     template = template.replace('%EMAIL%', project_configs['email'])
