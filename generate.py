@@ -1,10 +1,13 @@
 from json import loads
-import os
-OUTPUT_DIR = 'output'
-f = open('config.json')
+import os, sys
+project_root = ""
+if len(sys.argv) > 1:
+    project_root = sys.argv[1]
+OUTPUT_DIR = f'{project_root}/output'
+f = open(f'{project_root}/config.json')
 configs = loads(f.read())
 f.close()
-f = open('project_config.json')
+f = open(f'{project_root}/project_config.json')
 project_configs = loads(f.read())
 f.close()
 br = '\n'
@@ -91,7 +94,6 @@ def create_swagger_file(configs):
     template = template.replace('%EMAIL%', project_configs['email'])
     template = template.replace('%SERVERS%', servers)
     template = template.replace('%PATHS%', paths)
-    print(template)
 
 
 for config in configs:
