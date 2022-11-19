@@ -1,0 +1,8 @@
+{
+  "name": "User management",
+  "email": "ehsan.shirzadi@gmail.com",
+  "servers": [
+    {"url":  "localhost:8080", "description": "localhost development"},
+    {"url":  "project.domain.com", "description": "remote APIs"}
+  ]
+}
