@@ -1,10 +1,17 @@
 from json import loads
+import os
+OUTPUT_DIR = 'output'
 f = open('config.json')
 configs = loads(f.read())
 br = '\n'
 
 
 def create_schema(object):
+    SCHEMA_DIR = f'{OUTPUT_DIR}/schemas'
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+    if not os.path.exists(SCHEMA_DIR):
+        os.makedirs(SCHEMA_DIR)
     required_fields = ""
     properties = ""
     for field in config['fields']:
@@ -29,7 +36,7 @@ def create_schema(object):
     template = template.replace('%REQUIRED_FIELDS%', required_fields)
     template = template.replace('%PROPERTIES%', properties)
     print(template)
-    f = open(f'./output/{object["name"]}.yaml', 'w')
+    f = open(f'{SCHEMA_DIR}/{object["name"]}.yaml', 'w')
     f.write(template)
     f.close()
 
